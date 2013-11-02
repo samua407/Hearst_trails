@@ -1,0 +1,371 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"Margin",
+				"margin-left"
+			],
+			[
+				"month",
+				"monthView"
+			],
+			[
+				"get",
+				"getDate"
+			],
+			[
+				"End",
+				"EndSunday"
+			],
+			[
+				"m",
+				"monthDay"
+			],
+			[
+				"ge",
+				"getDate"
+			],
+			[
+				"da",
+				"dayView"
+			],
+			[
+				"mon",
+				"monthView"
+			],
+			[
+				"e",
+				"event"
+			],
+			[
+				"end",
+				"EndSunday"
+			],
+			[
+				"Monday",
+				"LastMondayDay"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"en",
+				"endTime"
+			],
+			[
+				"calen",
+				"Calendar"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"if",
+				"ife	if … else"
+			],
+			[
+				"modal",
+				"modalX"
+			],
+			[
+				"MODAL",
+				"ModalTags"
+			],
+			[
+				"ap",
+				"appendTo"
+			],
+			[
+				"Ar",
+				"ArticleContainer"
+			],
+			[
+				"article",
+				"articleThumb"
+			],
+			[
+				"appe",
+				"appendTo	.appendTo()"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pa",
+				"Package Control: Enable Package"
+			],
+			[
+				"pack",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"file",
+				"FileDiffs: Menu"
+			],
+			[
+				"pag",
+				"Package Control: Install Package"
+			],
+			[
+				"p",
+				"Package Control: Remove Package"
+			],
+			[
+				"",
+				"Package Control: List Packages"
+			],
+			[
+				"fo",
+				"Format: Javascript"
+			],
+			[
+				"for",
+				"Format: Javascript"
+			],
+			[
+				"paca",
+				"Package Control: Install Package"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"jquery",
+				"Set Syntax: jQuery (JavaScript)"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 245.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Node_server/learning node/nodeServer/server.js",
+		"/Users/Home/Documents/Leeching/nodejsTut/router.js",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioInputExample/src/testApp.h",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioInputExample/src/testApp.cpp",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioInputExample/src/main.cpp",
+		"/Users/Home/Documents/MFADT/Fall 2013/Algo/OpenFrameWorks/addons/ofxMSAOpenCL/README.md",
+		"/Users/Home/Downloads/7-SegmentDisplay_Arduino_addon/README",
+		"/Users/Home/Downloads/levCATwist/levCATwist.fla",
+		"/Users/Home/Library/Messages/Archive/2013-07-25/Mennie Shen on 2013-07-25 at 16.03-10.ichat",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Thesis Research/What is this about.txt",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Thesis Research/Like-Love-Afraid-Hate-Believe-Want-Hope.md",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Thesis Research/untitled.txt",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Thesis Research/README.md",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/User/JsFormat.sublime-settings",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/JsFormat/JsFormat.sublime-settings",
+		"/Users/Home/Downloads/homepage-parsons-lrg.svg",
+		"/Users/Home/Desktop/Trails-master/trailsDev/modal2.html",
+		"/Users/Home/Desktop/Trails-master/trailsDev/styles/modelview.css",
+		"/Users/Home/Desktop/Trails-master/trailsDev/scripts/render.js",
+		"/Users/Home/Desktop/Trails-master/trailsDev/modal.html",
+		"/Users/Home/Documents/MFADT/Fall 2013/Algo/OpenFrameWorks/Reference/Week3/homework.md",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/writing/MFADT Thesis Research & Writing Overview.md",
+		"/Users/Home/Documents/MFADT/Fall 2013/Algo/OpenFrameWorks/examples/utils/fileBufferLoadingCSVExample/bin/data/dot.wav",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioOutputExample/src/testApp.h",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioOutputExample/src/main.cpp",
+		"/Volumes/Data/home/pi/openFrameworks/examples/sound/audioOutputExample/src/testApp.cpp",
+		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/IdeasA.md",
+		"/Users/Home/Documents/MFADT/HEARST/prototype03/hearstDev_v2/scripts/RESTclient.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/index.html",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/scripts/trailManager.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/scripts/RESTclient.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/hearstDev_v2/index.html",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/hearstDev_v2/scripts/RESTclient.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/hearstDev_v2/scripts/trailManager.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/.gitignore",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/PrototypeB[javascript]/scripts/routing.js",
+		"/Users/Home/Desktop/calendar.html",
+		"/Users/Home/Desktop/calendar",
+		"/Users/Home/Downloads/calendar.js-master/calendar.js",
+		"/Users/Home/Documents/MFADT/Fall 2013/IndependentStudy/README.md",
+		"/Volumes/boot/config.txt",
+		"/Users/Home/Documents/MFADT/Fall 2013/Algo/OpenFrameWorks/apps/README.md",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Alignment/Default (OSX).sublime-keymap",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Javascript Beautify/Default (OSX).sublime-keymap",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Javascript Beautify/JavascriptBeautify.sublime-settings",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/User/JavascriptBeautify.sublime-settings",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/hearstDev/scripts/render.js",
+		"/Users/Home/Documents/MFADT/HEARST/Prototype02/hearstDev/scripts/hash.js",
+		"/Users/Home/Documents/MFADT/HEARST/fauxHTml/UItests/scripts/script.js",
+		"/Users/Home/Documents/MFADT/HEARST/HearstGit/scripts/RESTclient.js",
+		"/Users/Home/Documents/MFADT/HEARST/HearstGit/styles/modelview.css",
+		"/Users/Home/Documents/MFADT/HEARST/HearstGit/index.html",
+		"/Users/Home/Documents/MFADT/HEARST/JsApi/styles/modelview.css",
+		"/Users/Home/Documents/MFADT/HEARST/JsApi/index.html",
+		"/Users/Home/Documents/MFADT/HEARST/JsApi/scripts/RESTclient.js",
+		"/Users/Home/Desktop/thesis/Thesis",
+		"/Users/Home/Desktop/IMG_0681.JPG",
+		"/Users/Home/Desktop/221606_10151691962670312_424836768_n.jpg",
+		"/Applications/MAMP/htdocs/Trails-master/FuturePull.php",
+		"/Users/Home/Desktop/Trails-master/FuturePull.php",
+		"/Users/Home/Downloads/ayofeed2/data/info.json",
+		"/Users/Home/Downloads/openpaths_MechanicalHuman.csv",
+		"/Users/Home/Downloads/tweets/tweets.csv",
+		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"News",
+			"history",
+			"permalink\">#<",
+			"encode",
+			"results",
+			"Capturing an Asteroid",
+			"IMAGE_1_small_new_url"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Broadcast Media",
+			"History",
+			"permalink\">[0]<",
+			"ArticleContainer"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.unsaved_changes":
+	{
+		"height": 65.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 210.0,
+	"status_bar_visible": true
+}
