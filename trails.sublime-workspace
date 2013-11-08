@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"CA",
+				"Call"
+			],
+			[
+				"type",
+				"typeof"
+			],
+			[
+				"ar",
+				"article"
+			],
+			[
+				"e",
+				"evaluateCurrentTag"
+			],
+			[
+				"s",
+				"steps"
+			],
+			[
+				"art",
+				"Articles"
+			],
+			[
+				"trail",
+				"trailExtended"
+			],
+			[
+				"pu",
+				"publicationId"
+			],
+			[
 				"margin",
 				"margin-left"
 			],
@@ -42,10 +74,6 @@
 			[
 				"mon",
 				"monthView"
-			],
-			[
-				"e",
-				"event"
 			],
 			[
 				"end",
@@ -103,6 +131,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Styles/main.css",
+			"settings":
+			{
+				"buffer_size": 796,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 450,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Scripts/main.js",
+			"settings":
+			{
+				"buffer_size": 3514,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -188,6 +240,7 @@
 	},
 	"file_history":
 	[
+		"/Users/Home/Documents/[trails]Bl.io/[git]development/Scripts/lib/jquery.min.js",
 		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Node_server/learning node/nodeServer/server.js",
 		"/Users/Home/Documents/Leeching/nodejsTut/router.js",
 		"/Users/Home/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
@@ -301,8 +354,91 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Styles/main.css",
+					"settings":
+					{
+						"buffer_size": 796,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								796,
+								796
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 450,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								450,
+								450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Scripts/main.js",
+					"settings":
+					{
+						"buffer_size": 3514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2290,
+								2290
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 9.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

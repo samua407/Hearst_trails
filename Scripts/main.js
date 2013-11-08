@@ -1,17 +1,3 @@
-var xhr = new XMLHttpRequest();
-xhr.open('HEAD', 'http://www.goodhousekeeping.co.uk/cm/goodhousekeepinguk/images/bB/proper-beef-stew-111013-de-md.jpg', true);
-xhr.onreadystatechange = function() {
-	if (xhr.readyState == 4) {
-		if (xhr.status == 200) {
-			console.log('Size in bytes: ' + xhr.getResponseHeader('Content-Length'));
-		} else {
-			console.log('ERROR');
-		}
-	}
-};
-xhr.send(null);
-
-
 /*
 *****************************************
 THIS NEEDS A NAME
@@ -23,13 +9,15 @@ REST services data model
 var core = {
 
 	hearstAPI: "http://hearst.api.mashery.com/Article/search?",
-	hearstKey: "tru42eq8jjd6668ezayurxz3"
+	hearstKey: "tru42eq8jjd6668ezayurxz3" //this should be encrypted and retrieved from our server just before the ajax call
 }
 
 var trail = {
 
 	trailID: "ABC123",
 	steps: [],
+	//step(tag, img)
+
 	/* NOT YET IN USE, WILL LET US FORK THE TRAILS
 	_isFork: false,
 	_parent: "ABC122",
@@ -42,12 +30,15 @@ var trailExtended = {
 
 	currentTag: "NoTag",
 	currentHead: 0,
+	hasReachedEnd: false,
+	Articles_maxSize: 1000,
 	DrawArticles: [],
 	Articles: [],
+	//article(title, img, tags, excerpt, publication, url)
 
 };
 
-// objects updaters 
+// objects updater 
 
 function evaluateCurrentTag() {
 
@@ -65,43 +56,47 @@ function evaluateCurrentTag() {
 
 function evaluateCurrentDraw() {
 
-	//this will delete array elements of the currentDraw, it will not reemplace the object so we can keep the binding alive
+	//this will delete array elements of the currentDraw, it will not replace the object so we can keep the binding alive
 
 }
 
-// child object contructors 
+// child object constructors 
 
 function step(tag, img) {
-	this.tag = tag;
+	if (typeof tag != "undefined" && typeof tag == "string") this.tag = tag;
 	this.img = img;
 	if (typeof img != "string") this.img = "../Images/stepDefault.png"; // in case img is not a url
 
 };
 
-function article(title, img, tags, exerpt, publication, url) {
+function article(title, img, img_lrg, tags, excerpt, publication, url, type, id) {
 
 	this.title = title;
 	this.img = img
-	if (typeof img != "string") this.img = "../Images/ArtcileDefault.png"; // in case img is not a url
+	if (typeof img != "string") this.img = "../Images/ArticleDefault.png"; // in case img is not a url
+	this.img_lrg = img_lrg
+	if (typeof img_lrg != "string") this.img_lrg = "../Images/ArticleDefault.png"; // in case img is not a url
 	this.tags = tags;
-	this.exerpt = exerpt;
+	this.excerpt = excerpt;
 	this.publication = publication;
 	this.url = url;
+	this.type = type;
+	this.id = id;
+
 
 };
 
-// REST CALL
 
-function call(keyword, publication, size, start) {
+function call(keyword, publication, size) {
 
 	this._key = core.hearstKey;
 	this._pretty = 0;
 	this.shape = "brief";
 	this.pages = "full";
 	this.sort = "publish_date,desc";
-
-	this.start = start;
 	this.limit = size;
+	this.start = 0;
+
 
 	if (typeof keyword != "undefined" && typeof keyword == "string") {
 		this.keywords = keyword;
@@ -110,20 +105,39 @@ function call(keyword, publication, size, start) {
 	if (typeof publication != "undefined") {
 		this.site_id = publication;
 	};
-	if (typeof start === "undefined") {
-		this.start = 0;
-	};
+
 	if (typeof size === "undefined") {
-		this.limit = 5;
+		this.limit = 10;
 	};
 
 };
 
+// REST CALL
 
-var currentCall = new call();
-console.log(currentCall);
+//function GrowTrail
 
-function retriveArticles(Call) {
+
+var currentCall = new call("nasa");
+//console.log(currentCall);
+
+function FetchArticles(Call) {
+	//change the current tag to the new tag 
+	// 
+	if (trailExtended.currentTag != Call.keywords) {
+		console.log("new")
+		trailExtended.currentHead = Call.start;
+		trailExtended.currentTag = Call.keywords;
+		trailExtended.hasReachedEnd = false;
+	} else {
+		Call.start = trailExtended.currentHead;
+	};
+
+	if (trailExtended.hasReachedEnd == true) {
+		console.log("we have the reached end of the archive.... WOW")
+		return;
+	};
+
+	console.log(Call);
 	$.ajax({
 		type: 'GET',
 		crossDomain: true,
@@ -142,10 +156,77 @@ function retriveArticles(Call) {
 			console.log("before");
 		},
 		success: function(data) {
+			console.log("success");
+
 			// successful request; do something with the data
-			console.log(data);
-			console.log("succes");
-			console.log("ready to construct the childs");
+			// update the head
+			if (data.items.length == 0) {
+				trailExtended.hasReachedEnd = true;
+			}
+			trailExtended.currentHead += data.items.length;
+
+			// construct the children 
+
+			console.log("ready to construct the children");
+			for (var i = data.items.length - 1; i >= 0; i--) {
+
+				var title = data.items[i].title;
+				var tags = data.items[i].keywords;
+				var excerpt = data.items[i].promo_teaser;
+				var publication = data.items[i].origin_site_name;
+				var url = data.items[i].canonical_url;
+				var type = data.items[i].article_type_id;
+				var id = data.items[i].id;
+
+				//getting the article image with fallbacks 
+
+				var img = data.items[i].pages[0].IMAGE_1_medium_url;
+				if (typeof img != "string") {
+					console.log("fall back to IMAGE_1_medium_new_url");
+					img = data.items[i].pages[0].IMAGE_1_medium_new_url;
+				};
+				if (typeof img != "string") {
+					console.log("fall back to IMAGE_1_url");
+					console.log(data.items[i]);
+					img = data.items[i].pages[0].IMAGE_1_url;
+				};
+				if (typeof img != "string") {
+					console.log("fall back to IMAGE_1_new_url");
+					img = data.items[i].pages[0].IMAGE_1_new_url;
+				};
+
+				if (typeof img != "string") {
+					console.log("skiping article");
+					console.log(data.items[i]);
+					continue;
+				};
+
+				//getting the article image for modal view with fallbacks 
+
+				var img_lrg = data.items[i].pages[0].IMAGE_1_url;
+				if (typeof img_lrg != "string") {
+					console.log("fall back to IMAGE_1_url");
+					console.log(data.items[i]);
+					img_lrg = data.items[i].pages[0].IMAGE_1_url;
+				};
+				if (typeof img_lrg != "string") {
+					console.log("fall back to IMAGE_1_new_url");
+					img_lrg = data.items[i].pages[0].IMAGE_1_new_url;
+				};
+
+				if (typeof img_lrg != "string") {
+					console.log("skiping article");
+					console.log(data.items[i]);
+					continue;
+				};
+
+				var tmpart = new article(title, img, img_lrg, tags, excerpt, publication, url, type, id);
+
+
+				trailExtended.Articles.push(tmpart);
+
+
+			};
 
 		},
 		error: function() {
@@ -156,13 +237,34 @@ function retriveArticles(Call) {
 			console.log("ready to evaluate the main objects");
 
 
+			console.log(trailExtended);
+			//debug 
+			$("body").empty();
+			for (var i = trailExtended.Articles.length - 1; i >= 0; i--) {
+				$("<img src = " + trailExtended.Articles[i].img + " width=" +
+					300 + " />").appendTo("body");
+
+			};
 		},
 
 	});
 };
 
 
-//var x = new article(title, img, tags, exerpt, publication, url);
-//var y = new step(tag, img);
 //evaluateCurrentTag();
-retriveArticles(currentCall);
+FetchArticles(currentCall);
+
+
+/// touch and retrieve the size 
+// var xhr = new XMLHttpRequest();
+// xhr.open('HEAD', 'http://www.goodhousekeeping.co.uk/cm/goodhousekeepinguk/images/bB/proper-beef-stew-111013-de-md.jpg', true);
+// xhr.onreadystatechange = function() {
+// 	if (xhr.readyState == 4) {
+// 		if (xhr.status == 200) {
+// 			console.log('Size in bytes: ' + xhr.getResponseHeader('Content-Length'));
+// 		} else {
+// 			console.log('ERROR');
+// 		}
+// 	}
+// };
+// xhr.send(null);
