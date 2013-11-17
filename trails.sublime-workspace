@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"s",
+				"start"
+			],
+			[
+				"cu",
+				"currentHead"
+			],
+			[
+				"img",
+				"img_lrg"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"it",
+				"items"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
 				"CA",
 				"Call"
 			],
@@ -18,10 +42,6 @@
 			[
 				"e",
 				"evaluateCurrentTag"
-			],
-			[
-				"s",
-				"steps"
 			],
 			[
 				"art",
@@ -96,10 +116,6 @@
 				"Calendar"
 			],
 			[
-				"for",
-				"for	for (…) {…}"
-			],
-			[
 				"if",
 				"ife	if … else"
 			],
@@ -132,10 +148,13 @@
 	"buffers":
 	[
 		{
-			"file": "Styles/main.css",
+			"contents": "/*\n*****************************************\nTHIS NEEDS A NAME\nREST services data model\n*/\n\n// main objects \n\nvar core = {\n\n	hearstAPI: \"http://hearst.api.mashery.com/Article/search?\",\n	hearstKey: \"tru42eq8jjd6668ezayurxz3\" //this should be encrypted and retrieved from our server just before the ajax call\n}\n\nvar trail = {\n\n	trailID: \"ABC123\",\n	steps: [],\n	//step(tag, img)\n\n	/* NOT YET IN USE, WILL LET US FORK THE TRAILS\n	_isFork: false,\n	_parent: \"ABC122\",\n	_forks: [],\n	*/\n\n};\n\nvar trailExtended = {\n\n	currentTag: \"NoTag\",\n	currentHead: 0,\n	hasReachedEnd: false,\n	Articles_maxSize: 1000,\n	DrawArticles: [],\n	Articles: [],\n	//article(title, img, tags, excerpt, publication, url)\n\n};\n\n// objects updater \n\nfunction evaluateCurrentTag() {\n\n	var trailSize = trail.steps.length;\n\n	if (trailSize === 0) {\n		console.log(\"undefined\");\n		trailExtended.currentTag = \"NoTag\";\n	} else {\n		console.log(trailSize);\n		trailExtended.currentTag = trail.steps[trailSize - 1].tag;\n	};\n};\n\n\nfunction evaluateCurrentDraw() {\n\n	//this will delete array elements of the currentDraw, it will not replace the object so we can keep the binding alive\n\n}\n\n// child object constructors \n\nfunction step(tag, img) {\n	if (typeof tag != \"undefined\" && typeof tag == \"string\") this.tag = tag;\n	this.img = img;\n	if (typeof img != \"string\") this.img = \"../Images/stepDefault.png\"; // in case img is not a url\n\n};\n\nfunction article(title, img, img_lrg, tags, excerpt, publication, url, type, id) {\n\n	this.title = title;\n	this.img = img\n	if (typeof img != \"string\") this.img = \"../Images/ArticleDefault.png\"; // in case img is not a url\n	this.img_lrg = img_lrg\n	if (typeof img_lrg != \"string\") this.img_lrg = \"../Images/ArticleDefault.png\"; // in case img is not a url\n	this.tags = tags;\n	this.excerpt = excerpt;\n	this.publication = publication;\n	this.url = url;\n	this.type = type;\n	this.id = id;\n\n\n};\n\n\nfunction call(keyword, publication, size) {\n\n	this._key = core.hearstKey;\n	this._pretty = 0;\n	this.shape = \"brief\";\n	this.pages = \"full\";\n	this.sort = \"publish_date,desc\";\n	this.limit = size;\n	this.start = 0;\n\n\n	if (typeof keyword != \"undefined\" && typeof keyword == \"string\") {\n		this.keywords = keyword;\n		//this.total = 1;\n	};\n	if (typeof publication != \"undefined\") {\n		this.site_id = publication;\n	};\n\n	if (typeof size === \"undefined\") {\n		this.limit = 10;\n	};\n\n};\n\n// REST CALL\n\n//function GrowTrail\n\n\nvar currentCall = new call(\"nasa\");\n//console.log(currentCall);\n\nfunction FetchArticles(Call) {\n	//change the current tag to the new tag \n	// \n	if (trailExtended.currentTag != Call.keywords) {\n		console.log(\"new\")\n		trailExtended.currentHead = Call.start;\n		trailExtended.currentTag = Call.keywords;\n		trailExtended.hasReachedEnd = false;\n	} else {\n		Call.start = trailExtended.currentHead;\n	};\n\n	if (trailExtended.hasReachedEnd == true) {\n		console.log(\"we have the reached end of the archive.... WOW\")\n		return;\n	};\n\n	console.log(Call);\n	$.ajax({\n		type: 'GET',\n		crossDomain: true,\n		jsonp: false,\n		jsonpCallback: \"rawResponse_\" + trail.trailID,\n		cache: true,\n		jsonp: '_callback',\n		dataType: \"jsonp\",\n		global: true,\n		url: core.hearstAPI,\n		data: Call,\n\n\n		beforeSend: function() {\n			// this is where we append a loading image\n			console.log(\"before\");\n		},\n		success: function(data) {\n			console.log(\"success\");\n\n			// successful request; do something with the data\n			// update the head\n			if (data.items.length == 0) {\n				trailExtended.hasReachedEnd = true;\n			}\n			trailExtended.currentHead += data.items.length;\n\n			// construct the children \n\n			console.log(\"ready to construct the children\");\n			for (var i = data.items.length - 1; i >= 0; i--) {\n\n				var title = data.items[i].title;\n				var tags = data.items[i].keywords;\n				var excerpt = data.items[i].promo_teaser;\n				var publication = data.items[i].origin_site_name;\n				var url = data.items[i].canonical_url;\n				var type = data.items[i].article_type_id;\n				var id = data.items[i].id;\n\n				//getting the article image with fallbacks \n\n				var img = data.items[i].pages[0].IMAGE_1_medium_url;\n				if (typeof img != \"string\") {\n					console.log(\"fall back to IMAGE_1_medium_new_url\");\n					img = data.items[i].pages[0].IMAGE_1_medium_new_url;\n				};\n				if (typeof img != \"string\") {\n					console.log(\"fall back to IMAGE_1_url\");\n					console.log(data.items[i]);\n					img = data.items[i].pages[0].IMAGE_1_url;\n				};\n				if (typeof img != \"string\") {\n					console.log(\"fall back to IMAGE_1_new_url\");\n					img = data.items[i].pages[0].IMAGE_1_new_url;\n				};\n\n				if (typeof img != \"string\") {\n					console.log(\"skiping article\");\n					console.log(data.items[i]);\n					continue;\n				};\n\n				//getting the article image for modal view with fallbacks \n\n				var img_lrg = data.items[i].pages[0].IMAGE_1_url;\n				if (typeof img_lrg != \"string\") {\n					console.log(\"fall back to IMAGE_1_url\");\n					console.log(data.items[i]);\n					img_lrg = data.items[i].pages[0].IMAGE_1_url;\n				};\n				if (typeof img_lrg != \"string\") {\n					console.log(\"fall back to IMAGE_1_new_url\");\n					img_lrg = data.items[i].pages[0].IMAGE_1_new_url;\n				};\n\n				if (typeof img_lrg != \"string\") {\n					console.log(\"skiping article\");\n					console.log(data.items[i]);\n					continue;\n				};\n\n				var tmpart = new article(title, img, img_lrg, tags, excerpt, publication, url, type, id);\n\n\n				trailExtended.Articles.push(tmpart);\n\n\n			};\n\n		},\n		error: function() {\n			// failed request; give feedback to user\n			console.log(\"error\");\n		},\n		complete: function() {\n			console.log(\"ready to evaluate the main objects\");\n\n\n			console.log(trailExtended);\n			//debug \n			$(\"body\").empty();\n			for (var i = trailExtended.Articles.length - 1; i >= 0; i--) {\n				$(\"<img src = \" + trailExtended.Articles[i].img + \" width=\" +\n					300 + \" />\").appendTo(\"body\");\n\n			};\n		},\n\n	});\n};\n\n\n//evaluateCurrentTag();\nFetchArticles(currentCall);\n\n\n/// touch and retrieve the size \n// var xhr = new XMLHttpRequest();\n// xhr.open('HEAD', 'http://www.goodhousekeeping.co.uk/cm/goodhousekeepinguk/images/bB/proper-beef-stew-111013-de-md.jpg', true);\n// xhr.onreadystatechange = function() {\n// 	if (xhr.readyState == 4) {\n// 		if (xhr.status == 200) {\n// 			console.log('Size in bytes: ' + xhr.getResponseHeader('Content-Length'));\n// 		} else {\n// 			console.log('ERROR');\n// 		}\n// 	}\n// };\n// xhr.send(null);",
+			"file": "Scripts/main.js",
+			"file_size": 6312,
+			"file_write_time": 1383889090000000,
 			"settings":
 			{
-				"buffer_size": 796,
+				"buffer_size": 6312,
 				"line_ending": "Unix"
 			}
 		},
@@ -144,14 +163,6 @@
 			"settings":
 			{
 				"buffer_size": 450,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Scripts/main.js",
-			"settings":
-			{
-				"buffer_size": 3514,
 				"line_ending": "Unix"
 			}
 		}
@@ -240,6 +251,11 @@
 	},
 	"file_history":
 	[
+		"/Users/Home/Downloads/compiler-20131014/main.js",
+		"/Users/Home/Documents/[trails]Bl.io/[git]development/index.html",
+		"/Users/Home/Documents/[trails]Bl.io/[git]development/Styles/main.css",
+		"/Users/Home/Documents/[trails]Bl.io/[git]development/Scripts/main.js",
+		"/Users/Home/Documents/MFADT/Fall 2013/Algo/OpenFrameWorks/Reference/Final.md",
 		"/Users/Home/Documents/[trails]Bl.io/[git]development/Scripts/lib/jquery.min.js",
 		"/Users/Home/Documents/MFADT/Fall 2013/Thesis/Node_server/learning node/nodeServer/server.js",
 		"/Users/Home/Documents/Leeching/nodejsTut/router.js",
@@ -354,31 +370,32 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Styles/main.css",
+					"file": "Scripts/main.js",
 					"settings":
 					{
-						"buffer_size": 796,
+						"buffer_size": 6312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								796,
-								796
+								5573,
+								5573
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3330.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -395,8 +412,8 @@
 						"selection":
 						[
 							[
-								450,
-								450
+								0,
+								0
 							]
 						],
 						"settings":
@@ -406,34 +423,6 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Scripts/main.js",
-					"settings":
-					{
-						"buffer_size": 3514,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2290,
-								2290
-							]
-						],
-						"settings":
-						{
-							"spell_check": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 9.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
